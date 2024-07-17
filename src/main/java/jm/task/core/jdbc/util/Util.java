@@ -13,10 +13,10 @@ import java.sql.SQLException;
 
 public class Util {
     private static final String URL = "jdbc:mysql://localhost:3306/kata";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "password";
 
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
     private static SessionFactory sessionFactory = null;
 
     private Util() {
@@ -42,16 +42,18 @@ public class Util {
                     .setProperty("hibernate.connection.url", URL)
                     .setProperty("hibernate.connection.username", USERNAME)
                     .setProperty("hibernate.connection.password", PASSWORD)
-                    .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
+                    .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect")
                     .setProperty("hibernate.default_schema", "kata")
+                    .setProperty("hibernate.hbm2ddl.auto", "create")
                     .addAnnotatedClass(User.class)
-                    .setProperty("hibernate.c3p0.min_size","5")
-                    .setProperty("hibernate.c3p0.max_size","200")
-                    .setProperty("hibernate.c3p0.max_statements","200");
+                    .setProperty("hibernate.c3p0.min_size", "5")
+                    .setProperty("hibernate.c3p0.max_size", "200")
+                    .setProperty("hibernate.c3p0.max_statements", "200");
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+            System.out.println(configuration.getProperties());
         } catch (HibernateException e) {
             e.printStackTrace();
         }
