@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoJDBCImpl implements UserDao {
+/*public class UserDaoJDBCImpl implements UserDao {
     public UserDaoJDBCImpl() {
 
     }
@@ -136,4 +136,4 @@ public class UserDaoJDBCImpl implements UserDao {
         }
 
     }
-}
+}*/

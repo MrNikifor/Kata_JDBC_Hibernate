@@ -16,13 +16,13 @@ public class Util {
     private static final String USERNAME = "root";
     private static final String PASSWORD = "password";
 
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+    private static SessionFactory sessionFactory = null;
+
     private Util() {
     }
-    //-----------------------------
-    /*private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static SessionFactory sessionFactory = null;*/
 
-    public static Connection getConnectionJDBS() {
+    /*public static Connection getConnectionJDBS() {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -33,9 +33,9 @@ public class Util {
             System.out.println("There is no connection");
         }
         return connection;
-    }
+    }*/
 
-   /* public static SessionFactory getConnectionHibernate() {
+    public static SessionFactory getConnectionHibernate() {
         try {
             Configuration configuration = new Configuration()
                     .setProperty("hibernate.connection.driver_class", DRIVER)
@@ -43,10 +43,11 @@ public class Util {
                     .setProperty("hibernate.connection.username", USERNAME)
                     .setProperty("hibernate.connection.password", PASSWORD)
                     .setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect")
+                    .setProperty("hibernate.default_schema", "kata")
                     .addAnnotatedClass(User.class)
-                    .setProperty("hibernate.show_sql", "true")
-                    .setProperty("hibernate.format_sql", "true")
-                    .setProperty("hibernate.hbm2ddl.auto", "update");
+                    .setProperty("hibernate.c3p0.min_size","5")
+                    .setProperty("hibernate.c3p0.max_size","200")
+                    .setProperty("hibernate.c3p0.max_statements","200");
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                     .applySettings(configuration.getProperties()).build();
@@ -55,6 +56,6 @@ public class Util {
             e.printStackTrace();
         }
         return sessionFactory;
-    }*/
+    }
 
 }

@@ -2,6 +2,8 @@ package jm.task.core.jdbc.model;
 
 import javax.persistence.*;
 import java.util.Objects;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 @Entity
 @Table(name = "users")
 public class User {
